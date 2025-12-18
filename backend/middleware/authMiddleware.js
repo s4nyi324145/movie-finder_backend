@@ -6,10 +6,10 @@ export const authRequired = (req, res, next) => {
     if (!token) return res.status(401).json({ message: "Missing token" });
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, "valami_szupertitkos_kulcs");
         req.user = decoded; 
         next();
     } catch (err) {
-        return res.status(403).json({ message: "Invalid token" });
+        return res.status(403).json({ message: "You have to register/login to add comment" });
     }
 };
